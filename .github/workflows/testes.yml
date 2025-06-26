@@ -1,37 +1,25 @@
-name: Playwright Tests
+name: Run JavaScript Tests
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ master ]
   pull_request:
-    branches: [ "master" ]
-  workflow_dispatch:
+    branches: [ master ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # ou a versão que seu projeto usa
 
-      - name: Instalar dependências
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Instalar Playwright browsers
-        run: npx playwright install --with-deps
-
-      - name: Executar testes
-        run: npx playwright test
-
-      - name: Upload dos relatórios
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
+    - name: Run tests
+      run: npm test
