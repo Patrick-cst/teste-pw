@@ -2,7 +2,7 @@ export function geradorDeTagsDeIdentificacao(nome) {
     return nome.toUpperCase();
   }
   
-  export function verificarSePodeSerAdotado(idade, porte) {
+  export function verificarSePodeSerAdotado(idade , porte) {
     return idade === 1 && porte === 'M';
   }
   
